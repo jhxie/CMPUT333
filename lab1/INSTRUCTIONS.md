@@ -8,9 +8,9 @@
 
 You are given an encrypted file ([`ciphertext1`](./part1/ciphertext1)). You
 know that the plaintext that was encrypted was a text file and that it was
-encrypted using a variation of the Vigenﻡ؛­ﻡ؛∞ﻗ┤ﻸﻡ؛­ﻡ؛∞ﻗ½½re cipher. The key
-can be a combination of any printable ASCII characters. The way the encryption
-takes place between a single plaintext byte, `p`, and a single key byte, `k`,
+encrypted using a variation of the Vigenère cipher. The key can be a
+combination of any printable ASCII characters. The way the encryption takes
+place between a single plaintext byte, `p`, and a single key byte, `k`,
 to produce a single ciphertext byte, `c`, can be summarized as follows:
 First we split the key byte into the lower 4 bits (`kl`) and the higher 4
 bits (`kh`). We split the plaintext byte to its lower 4 bits (`pl`) and
