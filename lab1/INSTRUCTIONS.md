@@ -1,5 +1,3 @@
-<div id="content">
-
 # CMPUT 333, Assignment 1, Fall 2016
 
 (weak encryption, cipher modes, weak passwords)
@@ -146,17 +144,14 @@ encouraged to use the best strategy you can come up with. Do not use any other
 University computers for cracking the passwords or any personal computers. This
 includes machines in other labs, the GPU login servers, etc.
 *   If you find your initial strategy not producing results (i.e., cracking
-                                                             passwords), you
-might want to consider the hints given and to study how you could provide more
-appropriate wordlists and rules to John the Ripper. Hints are given out in
-class.
+passwords), you might want to consider the hints given and to study how you
+could provide more appropriate wordlists and rules to John the Ripper. Hints
+are given out in class.
 *   Your report must indicate which passwords you cracked (what was the
-                                                           plaintext of the
-                                                           passwords) and what
-kind of a strategy (if any) you followed.
+plaintext of the passwords) and what kind of a strategy (if any) you followed.
 *   Explain why the cracked passwords were weak passwords and, additionally,
 compare and contrast the Windows and Unix passwords. Which ones were easier to
-        crack and why?
+crack and why?
 
 In the interest of fairness, the release of the passwords will take place at a
 specific time and date, which will be pre-announced in class and/or via eclass.
@@ -180,7 +175,3 @@ you found any difficulties with this assignment and if you think there are ways
 in which it could be improved. In particular, we are interested to know if the
 assignment forced you to learn something new that you did not know of before,
 and how much effort it took you. Was the workload reasonable?]
-
-* * *
-
-</div>
