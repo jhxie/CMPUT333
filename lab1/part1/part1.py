@@ -1,9 +1,10 @@
-import sys
-import getopt
+#!/usr/bin/env python3
 
+import sys
 
 # mapping used for Lab 1
-map = [
+# NOTE 'map' identifier is a builtin function of python3
+mapping = [
     [0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc, 0xe],
     [0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc, 0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0],
     [0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc, 0xe, 0xf, 0x7],
@@ -20,11 +21,14 @@ map = [
     [0xd, 0xc, 0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9],
     [0xc, 0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd],
     [0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc]
-    ]
+]
 
-# Key is upper & lower case characters and numerals, no punctuation marks or special characters
-# key can be combination of hex values from 0x30 to 0x39 for numerals and 0x41 to 0x5A for uppercase and 0x61 to 0x7A for lowercase
-#                                             0  to  9                      A  to   Z                      a  to  z
+# Key is upper & lower case characters and numerals, no punctuation marks or
+# special characters
+# key can be combination of hex values from 0x30 to 0x39 for numerals and
+#                                             0  to  9
+# 0x41 to 0x5A for uppercase and 0x61 to 0x7A for lowercase
+#  A  to   Z                      a  to  z
 #
 # Key higher bit value must be 3,4,5,6 or 7
 #
@@ -38,40 +42,44 @@ map = [
 # kh <- higher 4 bits of key
 # kl <- lower 4 bits of key
 #
-# ch <- map[ph][kl]
-# cl <- map[pl][kh]
+# ch <- mapping[ph][kl]
+# cl <- mapping[pl][kh]
 # c <- 0x(ch)(cl)
 #
 #
 # Match mapping indexes to fit the range for platintext and key characters
 
 
-# This method will find all occurences of val in a given lst provided that lst is a double matrix
-# We can use this method to find values from the mapping given above
 def findInDoubleMatrix(lst, val):
+    """
+    This method will find all occurences of val in a given lst provided that
+    lst is a double matrix.
+    We can use this method to find values from the mapping given above.
+    """
     result = []
     temp = []
     for i, x in enumerate(lst):
         for j, y in enumerate(x):
-            if y==val:
+            if y == val:
                 temp = [i, j]
                 result.append(temp)
     return result
+
 
 def main():
 
     cipherfn = ''
 
-    #for num in range(0,15):
-    #   print(map[0][num])
+    # for num in range(0,15):
+    #    print(mapping[0][num])
 
     if len(sys.argv) == 1:
-        print('No cipherfile input added')
+        print("No cipherfile input added")
         sys.exit(2)
     else:
         cipherfn = sys.argv[1]
 
-    print(findInDoubleMatrix(map, 0xb))
+    print(findInDoubleMatrix(mapping, 0xb))
 
     with open(cipherfn, "rb") as cipherfile:
         byte = cipherfile.read(1)
@@ -82,12 +90,11 @@ def main():
         ch = intbyte >> 4
         cl = intbyte & 15
 
-        print("ch =", format(ch, '02x'))
-        print("cl =", format(cl, '02x'))
-        print(format(intbyte, '#04x'))
-        # print(format(intbyte, '#04x')) use this to print as 0x## where the ## are any digit from 0-f
-
-    cipherfile.close()
+        print("ch =", format(ch, "02x"))
+        print("cl =", format(cl, "02x"))
+        print(format(intbyte, "#04x"))
+        # print(format(intbyte, '#04x')) use this to print as 0x## where the ##
+        # are any digit from 0-f
 
     return
 
