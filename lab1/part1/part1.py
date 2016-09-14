@@ -23,14 +23,10 @@ mapping = [
     [0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc]
 ]
 
-# Key is upper & lower case characters and numerals, no punctuation marks or
-# special characters
-# key can be combination of hex values from 0x30 to 0x39 for numerals and
-#                                             0  to  9
-# 0x41 to 0x5A for uppercase and 0x61 to 0x7A for lowercase
-#  A  to   Z                      a  to  z
+# Key is any combination of printable and non-printable characters 0x00 to 0x7F
+# Key Length is 7
 #
-# Key higher bit value must be 3,4,5,6 or 7
+# Key higher bit value must be 0,1,2,3,4,5,6 or 7
 #
 # Plaintext characters from ASCII hex values range from 0x20 to 0x7F
 #
@@ -49,7 +45,6 @@ mapping = [
 #
 # Match mapping indexes to fit the range for platintext and key characters
 
-
 def findInDoubleMatrix(lst, val):
     """
     This method will find all occurences of val in a given lst provided that
@@ -65,24 +60,98 @@ def findInDoubleMatrix(lst, val):
                 result.append(temp)
     return result
 
+def cleanArrayForPlaintext(lst):
+    """
+    This method will clean out so that only the ph will contain 2,3,4,5,6,7
+    """
+    array = []
+    temp = []
+    for i, x in enumerate(lst):
+        if i == 2:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif i == 3:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif i == 4:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif i == 5:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif i == 6:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif i == 7:
+            temp = [i, x[1]]
+            array.append(temp)
+    return array
+
+def cleanArrayForKey(lst):
+    """
+    This method will clean out so that only the kh will contain 0,1,2,3,4,5,6,7
+    """
+    array = []
+    temp = []
+    for i, x in enumerate(lst):
+        if x[1] == 0:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif x[1] == 1:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif x[1] == 2:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif x[1] == 3:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif x[1] == 4:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif x[1] == 5:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif x[1] == 6:
+            temp = [i, x[1]]
+            array.append(temp)
+        elif x[1] == 7:
+            temp = [i, x[1]]
+            array.append(temp)
+    return array
+
+def possibleKeys(cllst, chlst):
+    """
+    This method checks the possible keys from the byte read using the mapping of cl and ch.
+    cllst will contain the tuples of [pl][kh]
+    chlst will contain the tuples of [ph][kl]
+    """
+    keys = []
+    keybyte = 0
+    for i, x in enumerate(cllst):
+        for j, y in enumerate(chlst):
+          keybyte = (x[1] << 4) + y[1]
+          keys.append(keybyte)
+    return keys
 
 def main():
 
     cipherfn = ''
-
-    # for num in range(0,15):
-    #    print(mapping[0][num])
+    plainfn = ''
 
     if len(sys.argv) == 1:
         print("No cipherfile input added")
         sys.exit(2)
+    elif len(sys.argv) == 2:
+        print("No output file added")
+        sys.exit(2)
     else:
         cipherfn = sys.argv[1]
+        plainfn = sys.argv[2]
 
-    print(findInDoubleMatrix(mapping, 0xb))
+    pfile = open(plainfn, "w")
 
     with open(cipherfn, "rb") as cipherfile:
-        byte = cipherfile.read(1)
         byte = cipherfile.read(1)
 
         intbyte = ord(byte)
@@ -90,11 +159,22 @@ def main():
         ch = intbyte >> 4
         cl = intbyte & 15
 
-        print("ch =", format(ch, "02x"))
-        print("cl =", format(cl, "02x"))
-        print(format(intbyte, "#04x"))
+        # cut out unneccesary ph values
+        pPoss = findInDoubleMatrix(mapping, ch)
+        kPoss = findInDoubleMatrix(mapping, cl)
+        pClean = cleanArrayForPlaintext(pPoss)
+        kClean = cleanArrayForKey(kPoss)
+
+        # possible keys for this byte
+        print("poss keys: ", possibleKeys(kClean, pClean))
+        print("len: ", len(possibleKeys(kClean, pClean)))
+
+        print("ch =", format(ch, "#03x"))
+        print("cl =", format(cl, "#03x"))
         # print(format(intbyte, '#04x')) use this to print as 0x## where the ##
         # are any digit from 0-f
+
+    pfile.close()
 
     return
 
