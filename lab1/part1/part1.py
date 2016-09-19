@@ -137,21 +137,8 @@ def possibleKeys(cllst, chlst):
               continue
           else:
               keybyte = (x[1] << 4) + y[1]
-              keys.append(format(keybyte, "#04x"))
+              keys.append(keybyte)
     return keys
-
-def possiblePlaintext(chlst, cllst):
-    """
-    """
-    plaintext = []
-    plaintextbyte = 0
-    plaintextval = "a"
-    for i, x in enumerate(chlst):
-        for j, y in enumerate(cllst):
-          plaintextbyte = (x[0] << 4) + y[0]
-          plaintextval = chr(plaintextbyte)
-          plaintext.append(plaintextval)
-    return plaintext
 
 def checkKeysPerLetter(prevKeyslst, checkKeyslst):
     """
@@ -162,6 +149,9 @@ def checkKeysPerLetter(prevKeyslst, checkKeyslst):
     return keys
 
 def plaintext(mapping, ch, cl, kh, kl):
+    """
+    This method converts a given ch and cl, into a ph and pl with using a kh and kl
+    """
     for i, x in enumerate(mapping):
         for j, y in enumerate(x):
             if (j == kh) and (j == kl) and (mapping[i][kh] == cl) and (mapping[i][kl] == ch):
@@ -175,23 +165,61 @@ def plaintext(mapping, ch, cl, kh, kl):
     txt = str(chr((ph << 4) + pl))
     return txt
 
-def test():
+def readFileForKey(keylength, cipherfile):
+    """
+    This method will find the key of a given encrypted file
+    """
+    keylst = []
+    firstByte = True
+
+    # opens the file or reading in binary mode
+    cFile = open(cipherfile, "rb")
+
+    i = 0
+    byte = cFile.read(1)
+    while byte:
+        i += 1
+        intbyte = ord(byte)
+
+        ch = intbyte >> 4
+        cl = intbyte & 15
+
+        pPoss = findInDoubleMatrix(mapping, ch)
+        kPoss = findInDoubleMatrix(mapping, cl)
+
+        pClean = cleanArrayForPlaintext(pPoss)
+        kClean = cleanArrayForKey(kPoss)
+
+        possKeys = sorted(possibleKeys(kClean, pClean))
+
+        if firstByte == True:
+            keylst.append(possKeys)
+        else:
+            keylst[i-1] = checkKeysPerLetter(keylst[i-1], possKeys)
+
+        #reset key bins for finding key
+        if (i == keylength):
+            if (firstByte == True):
+                firstByte = False
+            i = 0
+
+        byte = cFile.read(1)
+
+    cFile.close()
+
+    return keylst
+
+def decrypt(keylst):
+    """
+    This method decrypts the second argument file using the keylst
+    """
+    print("Starting decryption...")
     frstByte = True
     maxPossKeys = []
     newPossKeys = []
 
-    cipherfn = ''
-    plainfn = ''
-
-    if len(sys.argv) == 1:
-        print("No cipherfile input added")
-        sys.exit(2)
-    elif len(sys.argv) == 2:
-        print("No output file added")
-        sys.exit(2)
-    else:
-        cipherfn = sys.argv[1]
-        plainfn = sys.argv[2]
+    cipherfn = sys.argv[1]
+    plainfn = sys.argv[2]
 
     pfile = open(plainfn, "w")
 
@@ -208,125 +236,45 @@ def test():
             ch = intbyte >> 4
             cl = intbyte & 15
 
-            if i == 1:
-                pchar = plaintext(mapping, ch, cl, 0x5, 0x0)
-            elif i == 2:
-                pchar = plaintext(mapping, ch, cl, 0x2, 0xf)  
-            elif i == 3:
-                pchar = plaintext(mapping, ch, cl, 0x0, 0x8)
-            elif i == 4:
-                pchar = plaintext(mapping, ch, cl, 0x7, 0xc)
-            elif i == 5:
-                pchar = plaintext(mapping, ch, cl, 0x5, 0xf)
-            elif i == 6:
-                pchar = plaintext(mapping, ch, cl, 0x3, 0x0)
-            elif i == 7:
-                pchar = plaintext(mapping, ch, cl, 0x0, 0x0)
-                i = 0
+            k = keylst[i-1][0]
+            kh = k >> 4
+            kl = k & 15
+            pchar = plaintext(mapping, ch, cl, kh, kl)
 
             pfile.write(pchar)
+            if i == 7:
+                i = 0
 
     pfile.close()
+    print("Decryption finished")
 
     return
 
-# add separation of key lengths  ( 7 different arrays )
 def main():
-
-    frstByte = True
-    maxPossKeys = []
-    newPossKeys = []
-
-    cipherfn = ''
-    plainfn = ''
-
     if len(sys.argv) == 1:
         print("No cipherfile input added")
         sys.exit(2)
     elif len(sys.argv) == 2:
         print("No output file added")
         sys.exit(2)
+
+    keylength = input("Please enter the Key Length: ")
+    keylength = int(keylength)
+    print("Finding Keys...")
+    keylst = readFileForKey(keylength, sys.argv[1])
+
+    noKey = False
+    for i in range(keylength):
+        if not keylst[i]:
+            noKey = True
+    if not noKey:
+        print("Key found")
+        print("Key (int format)= ", keylst)
+        decrypt(keylst)
     else:
-        cipherfn = sys.argv[1]
-        plainfn = sys.argv[2]
-
-    pfile = open(plainfn, "w")
-
-    with open(cipherfn, "rb") as cipherfile:
-        #i = 1;
-        while True:
-        #while i == 1:
-            #read first byte
-            #print()
-            if frstByte == True:
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-
-            #read every 7th byte afterwards
-            else:
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                byte = cipherfile.read(1)
-                i = 0
-
-            intbyte = ord(byte)
-
-            ch = intbyte >> 4
-            cl = intbyte & 15
-
-            keys = findKeys(ch, cl)
-
-            # cut out unneccesary ph values
-            pPoss = findInDoubleMatrix(mapping, ch)
-            kPoss = findInDoubleMatrix(mapping, cl)
-
-            ##print()
-            ##print(pPoss)
-            ##print(kPoss)
-
-            pClean = cleanArrayForPlaintext(pPoss)
-            kClean = cleanArrayForKey(kPoss)
-
-            ##print()
-            ##print(pClean)
-            ##print(kClean)
-
-            possKeys = sorted(possibleKeys(kClean, pClean))
-            possPlaintext = sorted(possiblePlaintext(pClean, kClean))
-
-            #print("possKeys: ", possKeys)
-            #print("possPlaintext: ", possPlaintext)
-            #print(format(intbyte, '#04x'))
-
-            if frstByte == True:
-                maxPossKeys = possKeys
-                frstByte = False
-                print("poss keys: ", maxPossKeys)
-            else:
-
-                maxPossKeys = checkKeysPerLetter(maxPossKeys, possKeys)
-      
-                # possible keys for this byte
-                print("poss keys: ", sorted(maxPossKeys))
-                print("len: ", len(maxPossKeys))
-
-                #print("ch =", format(ch, "#03x"))
-                #print("cl =", format(cl, "#03x"))
-                print(format(intbyte, '#04x')) #use this to print as 0x## where the ##
-                # are any digit from 0-f
-
-    pfile.close()
+        print("Key not found")
 
     return
 
 if __name__ == "__main__":
-    test()
+    main()
