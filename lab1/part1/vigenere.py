@@ -50,6 +50,10 @@ def vigenere_encrypt(output_file_name: str, input_file_name: str, key: str):
 
 
 def vigenere_decrypt(output_file_name: str, input_file_name: str, key: str):
+    """
+    Decrypts the file with 'input_file_name' with the given full 'key' and
+    writes the output to file with 'output_file_name'.
+    """
     pass
 
 
@@ -94,7 +98,26 @@ def _byte_encrypt(clear_text_byte: int, subkey: str) -> bytes:
 
 
 def _byte_decrypt(cipher_text_byte: int, subkey: str) -> bytes:
-    pass
+    """
+    Decrypts the given 'cipher_text_byte' with the 'subkey' specified using
+    one variant of the Vigenère cipher.
+
+    NOTE: The 'subkey' is a single character of the whole Vigenère key;
+    for example, 'h' is the first subkey of the key 'hello'.
+    It is the caller's responsibility to pass the correct 'subkey' for a given
+    'cipher_text_byte' and ensures the "wrap-around" behavior of 'subkey'.
+    """
+    if not isinstance(cipher_text_byte, int):
+        raise TypeError("'cipher_text_byte' must be of 'int' type")
+
+    if cipher_text_byte not in range(1 << 8):
+        raise ValueError("'cipher_text_byte' must be in range [0, 1 << 8)")
+
+    if not isinstance(subkey, str):
+        raise TypeError("'subkey' must be of 'str' type")
+
+    if 1 != len(subkey):
+        raise ValueError("'subkey' must be a single character 'str' type")
 
 
 def bytes_get(file_name: str) -> int:
