@@ -11,7 +11,7 @@ __all__ = []
 # --------------------------------- MODULES -----------------------------------
 import argparse
 
-from itertools import repeat
+from itertools import cycle
 # --------------------------------- MODULES -----------------------------------
 
 # ---------------------------- GLOBAL CONSTANTS -------------------------------
@@ -39,28 +39,61 @@ mapping = (
 # -------------------------------- FUNCTIONS ----------------------------------
 
 
-def vigenere_encrypt(clear_text_byte: int, key: int) -> int:
+def vigenere_encrypt(output_file_name: str, input_file_name: str, key: str):
     """
-    Encrypts the given 'clear_text_byte' with the 'key' specified using
+    Encrypts the file with 'input_file_name' with the given full 'key' and
+    writes the output to file with 'output_file_name'.
+    """
+    with open(output_file_name, "wb") as output_file:
+        for byte in map(_byte_encrypt, bytes_get(input_file_name), cycle(key)):
+            output_file.write(byte)
+
+
+def vigenere_decrypt(output_file_name: str, input_file_name: str, key: str):
+    pass
+
+
+def _byte_encrypt(clear_text_byte: int, subkey: str) -> bytes:
+    """
+    Encrypts the given 'clear_text_byte' with the 'subkey' specified using
     one variant of the Vigenère cipher.
+
+    NOTE: The 'subkey' is a single character of the whole Vigenère key;
+    for example, 'h' is the first subkey of the key 'hello'.
+    It is the caller's responsibility to pass the correct 'subkey' for a given
+    'clear_text_byte' and ensures the "wrap-around" behavior of 'subkey'.
     """
-    if not all(isinstance(arg, int) for arg in locals().values()):
-        raise TypeError("All arguments must be of 'int' type")
+    # if not all(isinstance(arg, int) for arg in locals().values()):
+    #     raise TypeError("'clear_text_byte' must be of 'int' type")
+    if not isinstance(clear_text_byte, int):
+        raise TypeError("'clear_text_byte' must be of 'int' type")
 
     if clear_text_byte not in range(1 << 8):
         raise ValueError("'clear_text_byte' must be in range [0, 1 << 8)")
 
+    if not isinstance(subkey, str):
+        raise TypeError("'subkey' must be of 'str' type")
+
+    if 1 != len(subkey):
+        raise ValueError("'subkey' must be a single character 'str' type")
+
+    subkey_value = ord(subkey)
     high_mask = 0b11110000
     low_mask = high_mask >> 4
     plain_high = (clear_text_byte & high_mask) >> 4
     plain_low = clear_text_byte & low_mask
-    key_high = (key & high_mask) >> 4
-    key_low = key & low_mask
+    subkey_high = (subkey_value & high_mask) >> 4
+    subkey_low = subkey_value & low_mask
+    cipher_high = mapping[plain_high][subkey_low] << 4
+    cipher_low = mapping[plain_low][subkey_high]
+    # To convert an 'int' to a 'bytes' object properly in python 3,
+    # use the call pattern of bytes([0x9a])
+    cipher_byte = bytes([cipher_high | cipher_low])
 
-    return (mapping[plain_high][key_low] << 4) | mapping[plain_low][key_high]
+    return cipher_byte
 
 
-def vigenere_decrypt(cipher_text_byte: int, key: int) -> int:
+def _byte_decrypt(cipher_text_byte: int, subkey: str) -> bytes:
     pass
 
 
@@ -105,18 +138,17 @@ def main():
                        help="file name of the encrypted output")
     parser.add_argument("-k",
                         "--key",
-                        type=int,
+                        type=str,
                         required=True,
                         help="key to encrypt/decrypt the Vigenère variant")
     args = parser.parse_args()
 
-    # if args.decrypt:
-    #     print("Decrypted output is " + args.decrypt)
-    # elif args.encrypt:
-    #     print("Encrypted output is " + args.encrypt)
+    if args.decrypt:
+        print("Decrypted output is " + args.decrypt)
+    elif args.encrypt:
+        print("Encrypted output is " + args.encrypt)
+        vigenere_encrypt(args.encrypt, args.file, args.key)
 
-    for byte in map(vigenere_encrypt, bytes_get(args.file), repeat(args.key)):
-        print(byte)
     # List all the non-private attributes
     # for attr in filter(lambda attr: not attr.startswith("_"), dir(args)):
     #     if getattr(args, attr):
