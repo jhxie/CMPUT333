@@ -5,7 +5,7 @@ Encrypt or decrypt the variant of Vigenère cipher shown in part 1 of lab 1.
 """
 
 # ------------------------------- MODULE INFO ---------------------------------
-__all__ = []
+__all__ = ["vigenere_encrypt", "vigenere_decrypt"]
 # ------------------------------- MODULE INFO ---------------------------------
 
 # --------------------------------- MODULES -----------------------------------
@@ -160,6 +160,7 @@ def bytes_get(file_name: str) -> int:
 
 def main():
     """
+    Main command-line driver.
     """
     cli_description = "Encrypt/decrypt a file with the Vigenère cipher"
     parser = argparse.ArgumentParser(description=cli_description)
