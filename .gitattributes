@@ -1,3 +1,9 @@
-* text eol=lf
+.editorconfig	text	eol=lf
+.gitattributes	text	eol=lf
+.gitignore	text	eol=lf
+
+*.pdf	binary
 # Declare files that will always have LF line endings on checkout.
-*.py text eol=lf
+*.md	text	eol=lf
+*.py	text	eol=lf
+*.txt	text	eol=lf

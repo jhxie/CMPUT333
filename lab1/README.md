@@ -20,11 +20,13 @@ the lab slide:
 cd lab1/part1/
 python3 ./vigenere.py input_file.txt -e output_file.txt -k 'cipher'
 ```
-here the key used is 'cipher', the file to be encrypted is 'input_file.txt',
-and the encrypted output file is 'output_file.txt'.
+here the key used is 'cipher', the file to be encrypted is 'input\_file.txt',
+and the encrypted output file is 'output\_file.txt'.
 
 ## Part II
-TBD
+Refer to the [File Signatures](./slide/file_signatures.pdf) for hints on
+part II.
+
 
 ## Part III
 TBD
