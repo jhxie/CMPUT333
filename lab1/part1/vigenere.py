@@ -10,13 +10,14 @@ __all__ = []
 
 # --------------------------------- MODULES -----------------------------------
 import argparse
+import struct
 
 from itertools import cycle
 # --------------------------------- MODULES -----------------------------------
 
 # ---------------------------- GLOBAL CONSTANTS -------------------------------
 # Match mapping indexes to fit the range for platintext and key characters
-mapping = (
+MAPPING = (
     (0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc, 0xe),
     (0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc, 0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0),
     (0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc, 0xe, 0xf, 0x7),
@@ -38,7 +39,7 @@ mapping = (
 # the second index is actual cipher byte resides in the 'mapping'.
 # To find the row index after knowing column index and cipher byte:
 # inverted_mapping[column][cipher_byte]
-inverted_mapping = {key: dict() for key in range(len(mapping[0]))}
+INVERTED_MAPPING = {key: dict() for key in range(len(MAPPING[0]))}
 # ---------------------------- GLOBAL CONSTANTS -------------------------------
 
 
@@ -69,7 +70,7 @@ def _byte_encrypt(clear_text_byte: int, subkey: str) -> bytes:
     one variant of the Vigenère cipher.
 
     NOTE: The 'subkey' is a single character of the whole Vigenère key;
-    for example, 'h' is the first subkey of the key 'hello'.
+    for example, 'c' is the first subkey of the key 'cipher'.
     It is the caller's responsibility to pass the correct 'subkey' for a given
     'clear_text_byte' and ensures the "wrap-around" behavior of 'subkey'.
     """
@@ -94,8 +95,8 @@ def _byte_encrypt(clear_text_byte: int, subkey: str) -> bytes:
     plain_low = clear_text_byte & low_mask
     subkey_high = (subkey_value & high_mask) >> 4
     subkey_low = subkey_value & low_mask
-    cipher_high = mapping[plain_high][subkey_low] << 4
-    cipher_low = mapping[plain_low][subkey_high]
+    cipher_high = MAPPING[plain_high][subkey_low] << 4
+    cipher_low = MAPPING[plain_low][subkey_high]
     # To convert an 'int' to a 'bytes' object properly in python 3,
     # use the call pattern of bytes([0x9a])
     cipher_byte = bytes([cipher_high | cipher_low])
@@ -109,7 +110,7 @@ def _byte_decrypt(cipher_text_byte: int, subkey: str) -> bytes:
     one variant of the Vigenère cipher.
 
     NOTE: The 'subkey' is a single character of the whole Vigenère key;
-    for example, 'h' is the first subkey of the key 'hello'.
+    for example, 'c' is the first subkey of the key 'cipher'.
     It is the caller's responsibility to pass the correct 'subkey' for a given
     'cipher_text_byte' and ensures the "wrap-around" behavior of 'subkey'.
     """
@@ -132,8 +133,8 @@ def _byte_decrypt(cipher_text_byte: int, subkey: str) -> bytes:
     cipher_low = cipher_text_byte & low_mask
     subkey_high = (subkey_value & high_mask) >> 4
     subkey_low = subkey_value & low_mask
-    plain_high = inverted_mapping[subkey_low][cipher_high] << 4
-    plain_low = inverted_mapping[subkey_high][cipher_low]
+    plain_high = INVERTED_MAPPING[subkey_low][cipher_high] << 4
+    plain_low = INVERTED_MAPPING[subkey_high][cipher_low]
     plain_byte = bytes([plain_high | plain_low])
 
     return plain_byte
@@ -152,8 +153,9 @@ def bytes_get(file_name: str) -> int:
             byte = input_file.read(1)
             if not byte:
                 break
-            yield int(byte.hex(), base=16)
-            # print("{0:#x}".format(byte[0]))
+            yield struct.unpack("B", byte)[0]
+            # NOTE: the following only works in python version >= 3.5
+            # yield int(byte.hex(), base=16)
 
 
 def main():
@@ -197,8 +199,8 @@ def main():
     #         print(getattr(args, attr))
 
 if __name__ == "__main__":
-    for column in range(len(mapping[0])):
-        for row in range(len(mapping)):
-            inverted_mapping[column][mapping[row][column]] = row
+    for column in range(len(MAPPING[0])):
+        for row in range(len(MAPPING)):
+            INVERTED_MAPPING[column][MAPPING[row][column]] = row
     main()
 # -------------------------------- FUNCTIONS ----------------------------------
