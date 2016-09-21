@@ -34,11 +34,15 @@ mapping = (
     (0xc, 0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd),
     (0xe, 0xf, 0x7, 0x6, 0x4, 0x5, 0x1, 0x0, 0x2, 0x3, 0xb, 0xa, 0x8, 0x9, 0xd, 0xc)
 )
+# The first index is the column index in the 'mapping';
+# the second index is actual cipher byte resides in the 'mapping'.
+# To find the row index after knowing column index and cipher byte:
+# inverted_mapping[column][cipher_byte]
+inverted_mapping = {key: dict() for key in range(len(mapping[0]))}
 # ---------------------------- GLOBAL CONSTANTS -------------------------------
 
+
 # -------------------------------- FUNCTIONS ----------------------------------
-
-
 def vigenere_encrypt(output_file_name: str, input_file_name: str, key: str):
     """
     Encrypts the file with 'input_file_name' with the given full 'key' and
@@ -54,7 +58,9 @@ def vigenere_decrypt(output_file_name: str, input_file_name: str, key: str):
     Decrypts the file with 'input_file_name' with the given full 'key' and
     writes the output to file with 'output_file_name'.
     """
-    pass
+    with open(output_file_name, "wb") as output_file:
+        for byte in map(_byte_decrypt, bytes_get(input_file_name), cycle(key)):
+            output_file.write(byte)
 
 
 def _byte_encrypt(clear_text_byte: int, subkey: str) -> bytes:
@@ -119,6 +125,18 @@ def _byte_decrypt(cipher_text_byte: int, subkey: str) -> bytes:
     if 1 != len(subkey):
         raise ValueError("'subkey' must be a single character 'str' type")
 
+    subkey_value = ord(subkey)
+    high_mask = 0b11110000
+    low_mask = high_mask >> 4
+    cipher_high = (cipher_text_byte & high_mask) >> 4
+    cipher_low = cipher_text_byte & low_mask
+    subkey_high = (subkey_value & high_mask) >> 4
+    subkey_low = subkey_value & low_mask
+    plain_high = inverted_mapping[subkey_low][cipher_high] << 4
+    plain_low = inverted_mapping[subkey_high][cipher_low]
+    plain_byte = bytes([plain_high | plain_low])
+
+    return plain_byte
 
 def bytes_get(file_name: str) -> int:
     """
@@ -168,6 +186,7 @@ def main():
 
     if args.decrypt:
         print("Decrypted output is " + args.decrypt)
+        vigenere_decrypt(args.decrypt, args.file, args.key)
     elif args.encrypt:
         print("Encrypted output is " + args.encrypt)
         vigenere_encrypt(args.encrypt, args.file, args.key)
@@ -178,5 +197,8 @@ def main():
     #         print(getattr(args, attr))
 
 if __name__ == "__main__":
+    for column in range(len(mapping[0])):
+        for row in range(len(mapping)):
+            inverted_mapping[column][mapping[row][column]] = row
     main()
 # -------------------------------- FUNCTIONS ----------------------------------
