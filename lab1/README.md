@@ -46,5 +46,6 @@ cd lab1/part2/
 python3 ./part2.py test1.doc test2.docx test3.pdf
 ```
 
-## Part III
-TBD
+## Part III & Sliding Part
+Refer to the [Password Cracking](./slide/password_cracking.pdf) for hints on
+part III and sliding part.
