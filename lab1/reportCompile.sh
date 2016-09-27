@@ -11,6 +11,7 @@ fi
 
 if [[ -f "$report1" && -f "$report2" && -f "$report3" ]]; then
     echo "[SUCCESS] The compiled result is generated."
+    cat "$report1" "$report2" "$report3" > "$report"
 else
     echo "[FAIL] Some of the input files are missing."
 fi
