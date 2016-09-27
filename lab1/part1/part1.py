@@ -197,6 +197,11 @@ def readFileForKey(keylength, cipherfile):
         else:
             keylst[i-1] = checkKeysPerLetter(keylst[i-1], possKeys)
 
+        #if not keylst[i-1]:
+        #    print("No comparable keys in set")
+        #    cFile.close()
+        #    return keylst
+
         #reset key bins for finding key
         if (i == keylength):
             if (firstByte == True):
