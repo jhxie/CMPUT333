@@ -116,7 +116,8 @@ Note that explanation is not the same as observation. In responding to all the
 questions, you must refer back to the precise aspect of the ECB, CBC, CFB or
 OFB mode operation that caused the behavior you observed.
 
-*   Finally, you are given an encrypted file ([`ciphertext3`](./ciphertext3)),
+*   Finally, you are given an encrypted file ([`ciphertext3`
+](./part3/ciphertext3)),
 which you know has been encrypted using DES in ECB mode. You also know that the
 plaintext is a sequence of thirteen 8-byte long names, one name after the other
 (with no extra whitespace or separators between them). The plaintext file has

@@ -5,6 +5,16 @@ Due Monday, October 3rd 4:59 pm.
 Refer to either [INSTRUCTIONS.html](./INSTRUCTIONS.html) or
 [INSTRUCTIONS.md](./INSTRUCTIONS.md) for the assignment instructions.
 
+Please record the answer for each part in a separate file named
+`REPORT.md` and place them inside the corresponding subdirectories:
+[part1](./part1/), [part2](./part2/), and [part3](./part3/).
+
+To generate the compiled report markdown file, make sure all 3
+`REPORT.md` files are placed properly, then issue:
+```bash
+sh ./reportCompile.sh
+```
+
 ## Part I
 Refer to the [Viginere Cipher](./slide/viginere_cipher.pdf) and
 [Deciphering](./slide/deciphering.pdf) for hints on part I.
