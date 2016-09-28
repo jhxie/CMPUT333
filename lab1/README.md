@@ -32,7 +32,7 @@ python ./part1.py ciphertext1 output
 and then followed by an answer of '7' in the prompt.
 
 ### Usage Info for Implementation B
-To encrypt a file using the special variant of Vigen¨¨re cipher specified in
+To encrypt a file using the special variant of VigenÂ¨Â¨re cipher specified in
 the lab slide:
 ```bash
 cd lab1/part1/
@@ -59,3 +59,7 @@ python3 ./part2.py test1.doc test2.docx test3.pdf
 ## Part III & Sliding Part
 Refer to the [Password Cracking](./slide/password_cracking.pdf) for hints on
 part III and sliding part.
+
+## Sliding Part
+Refer to the ["Screen Usage"](./slide/screen.pdf) for hints on the usage of
+the "screen" program for sliding part.

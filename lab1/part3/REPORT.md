@@ -20,9 +20,9 @@ The encrypted output `cipherecb.enc` is 8 bytes larger than the original
 PKCS5 scheme, which is enabled by default for block ciphers.
 Source quoted from the `enc` manual page of `openssl`:
 All the block ciphers normally use PKCS#5 padding also known as standard block
-padding: this allows a rudimentary integrity or password check to be
-performed. If padding is disabled then the input data must be a multiple of the
-cipher block length."
+padding: this allows a rudimentary integrity or password check to be performed.
+If padding is disabled then the input data must be a multiple of the cipher
+block length."
 
 ##### CBC
 
