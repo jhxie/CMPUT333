@@ -1,4 +1,6 @@
 # Lab Assignment 1
+**NOTE**:  
+Refer to [REPORT.pdf](./REPORT.pdf) for answers to each part.
 
 Due Monday, October 3rd 4:59 pm.
 
@@ -16,6 +18,10 @@ sh ./reportCompile.sh
 ```
 
 ## Part I
+**NOTE**:  
+For marking purpose, please use implementation A; implementation B does not
+have password cracking functionality at all.
+
 Refer to the [Viginere Cipher](./slide/viginere_cipher.pdf) and
 [Deciphering](./slide/deciphering.pdf) for hints on part I.
 
@@ -47,17 +53,24 @@ python3 ./vigenere.py output_file.txt -d decrypted.txt -k 'cipher'
 ```
 
 ## Part II
+**NOTE**:  
+For marking purpose, please ignore the file type detector since it does not
+have password cracking functionality at all.
+
 Refer to the [File Signatures](./slide/file_signatures.pdf) for hints on
 part II.
 
 ### Usage Info for File Type Detector
 ```bash
 cd lab1/part2/
-python3 ./part2.py test1.doc test2.docx test3.pdf
+python3 ./detect.py test1.doc test2.docx test3.pdf
 ```
 
 ### Usage Info for Header Keys and Decryption
-This will first print to the terminal the partial keys for each of the hardcoded file signatures, and then it will use the hardcoded key we found (as described in the report for part 2) to decrypt input_file and write the result to output_file.
+This will first print to the terminal the partial keys for each of the
+hardcoded file signatures, and then it will use the hardcoded key we found (as
+described in the report for part 2) to decrypt input\_file and write the result
+to output\_file.
 ```bash
 cd lab1/part2/
 python3 ./part2.1.py input_file output_file

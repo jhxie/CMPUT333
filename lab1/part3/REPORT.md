@@ -112,6 +112,6 @@ The submitted version of program for part 1 was written by Stephen Arychuk, he
 also wrote the whole report for it and did the entire `openssl` related part
 of part 3; the program submitted for part 2 is entirely done by Stuart
 Bildfell; he wrote the whole report for part 2 as well; the report for part 3
-was written by Jiahui Xie; he also helped with a small portion of part 2 and
-wrote another version of program for part 1 (without the actual password
-cracking part).
+was written by Jiahui Xie; he also helped with the file signature portion of
+part 2 and wrote another version of program for part 1 (without the actual
+password cracking part).
