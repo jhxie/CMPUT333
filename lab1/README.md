@@ -32,7 +32,7 @@ python ./part1.py ciphertext1 output
 and then followed by an answer of '7' in the prompt.
 
 ### Usage Info for Implementation B
-To encrypt a file using the special variant of Vigen¨¨re cipher specified in
+To encrypt a file using the special variant of Vigenere cipher specified in
 the lab slide:
 ```bash
 cd lab1/part1/
@@ -54,6 +54,13 @@ part II.
 ```bash
 cd lab1/part2/
 python3 ./part2.py test1.doc test2.docx test3.pdf
+```
+
+### Usage Info for Header Keys and Decryption
+This will first print to the terminal the partial keys for each of the hardcoded file signatures, and then it will use the hardcoded key we found (as described in the report for part 2) to decrypt input_file and write the result to output_file.
+```bash
+cd lab1/part2/
+python3 ./part2.1.py input_file output_file
 ```
 
 ## Part III & Sliding Part
