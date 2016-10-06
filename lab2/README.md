@@ -8,3 +8,7 @@ Linux root password = "c333VMlab" without quotation marks.
 Windows root password = "c333VMlab" without quotation marks.
 
 We can decide on better passwords later on for creating a strong password with reasons behind the choice.
+
+### Part 2:
+
+Recompiled Linux so that the correct iptables have been enabled.
