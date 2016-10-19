@@ -26,6 +26,10 @@ Windows *administrator* password = "c333VMlab" without quotation marks.
 We can decide on better passwords later on for creating a strong password with
 reasons behind the choice.
 
+One of the TAs has posted a [link](
+https://www.schneier.com/blog/archives/2014/03/choosing_secure_1.html#!s!xkcd)
+that contains useful tips for choosing secure passwords.
+
 ## Part II:
 Refer to [VM Setup](./slide/vm_setup.pdf) for instructions on how to
 take snapshots of both virtual machines before doing anything else;
