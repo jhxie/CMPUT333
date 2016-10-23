@@ -1,6 +1,9 @@
 # Lab Assignment 2
 Refer to [INSTRUCTIONS.pdf](./INSTRUCTIONS.pdf) for the assignment
 instructions.
+
+Due Friday, November 4th 4:59 pm.
+
 To set up the proxy server, run:
 ```bash
 ./sshXX 1 CCID
@@ -37,3 +40,54 @@ take snapshots of both virtual machines before doing anything else;
 **HTTP** and **FTP** service properly.
 
 Recompiled Linux so that the correct iptables have been enabled.
+
+Distinction between *Active* FTP versus *Passive* FTP can be read [here](
+http://slacksite.com/other/ftp.html).
+
+One of the TAs gives hints on how to set up **FTP** service on the Linux host:
+
+> Some tips about setting up your FTP service.
+> 
+> 1) To start/restart your server you can use:
+> 
+> /etc/rc.d/rc.inetd start 
+> 
+> /etc/rc.d/rc.inetd restart 
+> 
+> OR
+> 
+> You can also modify your /etc/rc.d/rc.local file to start the service when
+> the server boots up.
+> 
+> 2) Before you start your server make sure that you edit the hosts.allow
+> and/or hosts.deny files accordingly, as well as the inetd.conf and of course
+> the vsftpd.conf file.
+> 
+> In the third you just need to uncomment the:
+> ftp     stream  tcp     nowait  root    /usr/sbin/tcpd  vsftpd
+> 
+> 3)Check with
+> netstat -a | grep ftp
+> or/and
+> telnet localhost
+> that your server is working.
+> 
+> 4) To see if you have configured your server correctly and that you can
+> retrieve the file on your Linux VM with a get command
+> (http://www.cs.colostate.edu/helpdocs/ftp.html) you can use: 
+> 
+> i)ftp localhost
+> 
+> ii)log in as anonymous or one of the users you have added
+> 
+> iii)use get to retrieve your pdf file
+> 
+> Pointers:
+> 
+> https://wiki.archlinux.org/index.php/Very\_Secure\_FTP\_Daemon
+> 
+> http://its.virginia.edu/unixsys/sec/hosts.html
+> 
+> Cheers,
+> 
+> Katia
