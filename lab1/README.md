@@ -95,9 +95,21 @@ A connector can be any of the following: \_, $, %
 > $1$ENqxo5u0$81tdi0P3MAN9vAvUGHn6y.  
 > $1$0gs0ZeaS$mAbjqR8ckVRYHCCHMRTBg.
 
+The actual passwords are:
+
+> flavius$aetius  
+> UNKNOWN
+> misbehavior  
+> UNKNOWN
+> UNKNOWN
+
 ### The Windows password hashes are:
 
 > D5D8E24F574290F9302D113D646B368F:9BA8384BD50192588AFF5F9B5F9625F0  
 > 8AFC234E5BE7BB568963805A19B0ED49:9C9607EBF3287C06876D8FC44FDC711E  
 > F4C310F5B3FAC8D63B1217229AE349BC:CB71BC560D760E506D1E96010DFDA970
 
+## References
+* [John Script](https://github.com/maetrics/john-scripts)
+* [Alphanumeric Configuration](
+http://security.stackexchange.com/questions/66106/brute-force-alphanumeric-password-using-johntheripper)
