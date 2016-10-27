@@ -98,9 +98,9 @@ A connector can be any of the following: \_, $, %
 The actual passwords are:
 
 > flavius$aetius  
-> UNKNOWN
+> UNKNOWN  
 > misbehavior  
-> UNKNOWN
+> UNKNOWN  
 > UNKNOWN
 
 ### The Windows password hashes are:

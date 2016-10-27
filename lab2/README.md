@@ -84,9 +84,46 @@ One of the TAs gives hints on how to set up **FTP** service on the Linux host:
 > 
 > Pointers:
 > 
-> https://wiki.archlinux.org/index.php/Very\_Secure\_FTP\_Daemon
+> https://wiki.archlinux.org/index.php/Very_Secure_FTP_Daemon
 > 
 > http://its.virginia.edu/unixsys/sec/hosts.html
+> 
+> Cheers,
+> 
+> Katia
+
+For testing whether **FTP** and **HTTP** services are set up properly:
+
+> You should now be able to use the script retrieve_files.pl which will attempt
+> both an http request and an ftp request to your machine.
+> 
+> To trigger an http request (to your windows VM) and an ftp request (to your
+> linux VM), you need to log onto your linux VM and run the following command:
+> 
+> curl http://10.229.100.XX/cgi-bin/retrieve_files.pl
+> 
+> where XX can be either 96 or 97. 
+> 
+> 
+> This will start by attempting to retrieve webcontent.html from your windows
+> VM. Once it successful grabs webcontent.html or unsuccessfully times out, it
+> will then make an ftp request to your linux VM to grab ftpcontent.pdf, first
+> using active ftp, and then using passive ftp. (Note: if your http service is
+> not correctly set up, you'll have to wait a few minutes for the request to
+> time out before it attempts the ftp requests). 
+> 
+> You can also trigger scan.pl to do a port scan of your machine as well from
+> your linux VM using:
+> 
+> curl 10.229.100.XX/cgi-bin/scan.pl
+> 
+> where XX can be either 96 or 97. 
+> 
+> Remember: the port scan of the windows machine will take longer than the
+> linux machine --- this is normal.
+> 
+> If you have any questions, as always don't hesitate to post to the forums or
+> talk to myself or Mark.
 > 
 > Cheers,
 > 
