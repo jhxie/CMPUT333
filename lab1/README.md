@@ -109,6 +109,18 @@ The actual passwords are:
 > 8AFC234E5BE7BB568963805A19B0ED49:9C9607EBF3287C06876D8FC44FDC711E  
 > F4C310F5B3FAC8D63B1217229AE349BC:CB71BC560D760E506D1E96010DFDA970
 
+The actual passwords are:
+
+> UNKNOWN  
+> gondolier  
+> UNKNOWN  
+
+Commands used to break the second one:
+```bash
+run/john --wordlist=list/9letterwords.txt -format=LM --rules first_half.txt
+run/john --wordlist=list/9letterwords.txt -format=nt --rules second_half.txt
+```
+
 ## References
 * [John Script](https://github.com/maetrics/john-scripts)
 * [Alphanumeric Configuration](
