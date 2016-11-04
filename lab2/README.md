@@ -1,8 +1,11 @@
 # Lab Assignment 2
-Refer to [INSTRUCTIONS.pdf](./INSTRUCTIONS.pdf) for the assignment
-instructions.
+**NOTE**:  
+Refer to [REPORT.pdf](./REPORT.pdf) for answers to each part.
 
 Due Friday, November 4th 4:59 pm.
+
+Refer to [INSTRUCTIONS.pdf](./INSTRUCTIONS.pdf) for the assignment
+instructions.
 
 To set up the proxy server, run:
 ```bash
@@ -13,6 +16,17 @@ where *CCID* needs to be replaced with the actual value.
 **NOTE**:  
 The password for the proxy server is the one given to you privately on a piece
 of paper.
+
+Please record the answer for each part in a separate file named
+`REPORT.md` and place them inside the corresponding subdirectories:
+[part1](./part1/), [part2](./part2/), [part3](./part3/), and [a1sliding](
+../lab1/a1sliding/).
+
+To generate the compiled report markdown file, make sure all 3
+`REPORT.md` files are placed properly, then issue:
+```bash
+sh ./reportCompile.sh
+```
 
 ## Part I:
 Refer to [VM Setup](./slide/vm_setup.pdf) for instructions on how to change
