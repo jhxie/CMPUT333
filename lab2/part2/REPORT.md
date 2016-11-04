@@ -14,3 +14,7 @@ hours". Windows user1 is derived from "Our third group member Dropped the
 course". Windows User2 is derived from "my Poor room mate has been Unemployed
 since Graduation".
 
+Windows web server is done through the addition of a module called mod_auth_sspi
+where it can pull windows credentials from the OS directly. This allows it to edit
+the web server config file that can require the login credentials from the user
+depending on which directory that they are trying to access.
