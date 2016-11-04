@@ -18,3 +18,8 @@ Windows web server is done through the addition of a module called mod_auth_sspi
 where it can pull windows credentials from the OS directly. This allows it to edit
 the web server config file that can require the login credentials from the user
 depending on which directory that they are trying to access.
+
+Linux FTP and TFTP servers are configured to run under the supervision of the
+*inetd* daemon; the configuration file for FTP server resides in */etc/* and
+is named as *vsftpd.conf*, the configuration file for TFTP server is at
+*/opt/opentftpd/opentftp.ini*.
