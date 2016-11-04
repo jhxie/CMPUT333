@@ -1,4 +1,8 @@
 ## Part 1
+
+**NOTE**:
+The actual user names for both machines are in all lower case.
+
 The passwords we used are listed in the table below:
 
 | Platform | Administrator/Root Password  | User1 Password | User2 Password |
