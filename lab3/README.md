@@ -3,6 +3,8 @@
 Due Monday, December 5th 4:59 pm.
 
 ## Part I:
+Refer to [Port Scanning](./slide/port_scanning.pdf) on hints for using various
+port scanning and packet sniffing tools.
 
 ## Part II:
 The virtual address of "Magic cookie found!" string is 0x0809f268.
