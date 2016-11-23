@@ -7,6 +7,9 @@ Refer to [Port Scanning](./slide/port_scanning.pdf) on hints for using various
 port scanning and packet sniffing tools.
 
 ## Part II:
+Refer to [Stack Smashing](./slide/stack_smash.pdf) for hints on exploiting
+stack overflow bugs.
+
 The virtual address of "Magic cookie found!" string is 0x0809f268.
 
 *28* is the minimum number of letters to overflow the buffer of the
