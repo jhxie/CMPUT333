@@ -15,8 +15,17 @@ The virtual address of "Magic cookie found!" string is 0x0809f268.
 *28* is the minimum number of letters to overflow the buffer of the
 [weak](./part2/weak) program.
 
-To find the minimum number of letters that caused overflow, run:
+To exploit the buffer overflow bug in the [weak](./part2/weak) program, run:
 ```bash
 cd part2
-python3 ./exploit.py -e ./weak
+python3 ./exploit.py -e ./weak -o buffer.bin
+```
+where the argument given to the *-e* flag is the *weak* program and the
+argument given to the *-o* flag (*buffer.bin*) is the sequence of bytes used
+to fill in the buffer.
+
+To replicate the result afterwards, simply run:
+```bash
+cd part2
+cat buffer.bin | ./weak
 ```
