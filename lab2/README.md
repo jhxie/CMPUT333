@@ -32,10 +32,10 @@ sh ./reportCompile.sh
 Refer to [VM Setup](./slide/vm_setup.pdf) for instructions on how to change
 passwords for both virtual machines.
 
-| Platform | Password  |
-|:--------:|:---------:|
-| Linux    | c333VMlab |
-| Windows  | c333VMlab |
+| Platform | Administrator/Root Password  | User1 Password | User2 Password |
+| -------- | ---------------------------- | -------------- | -------------- |
+| Linux    | 9%0byu(zY                    | v1-#>;/jf      | 9up]~z@qm      |
+| Windows  | sCSsd54>ttH                  | O3gmDtc        | mPrm8hbeenUsG  |
 
 Linux *root* password = "c333VMlab" without quotation marks.
 Windows *administrator* password = "c333VMlab" without quotation marks.
