@@ -97,7 +97,15 @@ nmap -A 10.229.100.98-255
 
 #### Question a
 
+See Step 1
+
+Command to start the ARP poison "ettercap -Q -T -w test.pcap -M arp /10.229.100.55,101,102/"
+
+Wireshark or tcpdump to analyze the captured pcap file.
+
 #### Question b
+
+
 
 #### Question c
 
