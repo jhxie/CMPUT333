@@ -140,7 +140,7 @@ instruction is issued and either one of the two above system call numbers are
 placed into the *eax* register.
 
 The hexadicimal representation for the system call number *1* and *252* are
-*0x1* and *0xfc*, respectively; turns out the only case involves the above
+*1* and *fc*, respectively; turns out the only case involves the above
 calling pattern is at virtual address beginning at *8050dfc* and ending with
 *8050e0f*:
 
@@ -173,6 +173,9 @@ https://github.com/torvalds/linux/blob/master/Documentation/adding-syscalls.txt)
 https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_32.tbl)
 * [x86 Assembly: Interfacing with Linux](
 https://en.wikibooks.org/wiki/X86_Assembly/Interfacing_with_Linux)
+* [Wireshark User's Guide](
+https://www.wireshark.org/docs/wsug_html_chunked/)
 * `man 1 ettercap`
+* `man 1 nmap`
 
 ### Division of Workload

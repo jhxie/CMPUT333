@@ -19,7 +19,7 @@ student group and designated machines used by TAs, respectively.
 #### Question b
 The services running on the victim host *10.229.100.55* are the following:
 
-| PORT     |  STATE | SERVICE       | VERSION                                                       |
+| Port     | State  | Service       | Version                                                       |
 | -------- | ------ | ------------- | ------------------------------------------------------------- |
 | 7/tcp    |  open  | echo          |                                                               |
 | 9/tcp    |  open  | discard?      |                                                               |
@@ -45,7 +45,7 @@ The services running on the victim host *10.229.100.55* are the following:
 
 The services running on the victim host *10.229.100.101* are:
 
-| PORT     | STATE | SERVICE    | VERSION         |
+| Port     | State | Service    | Version         |
 | -------- | ----- | ---------- | --------------- |
 | 22/tcp   | open  | tcpwrapped |                 |
 | 111/tcp  | open  | rpcbind    | 2 (rpc #100000) |
@@ -54,7 +54,7 @@ The services running on the victim host *10.229.100.101* are:
 
 The services running on the victim host *10.229.100.102* are:
 
-| PORT     | STATE | SERVICE    | VERSION         |
+| Port     | State | Service    | Version         |
 | -------- | ----- | ---------- | --------------- |
 | 22/tcp   | open  | tcpwrapped |                 |
 | 111/tcp  | open  | rpcbind    | 2 (rpc #100000) |
@@ -104,8 +104,6 @@ Command to start the ARP poison "ettercap -Q -T -w test.pcap -M arp /10.229.100.
 Wireshark or tcpdump to analyze the captured pcap file.
 
 #### Question b
-
-
 
 #### Question c
 
