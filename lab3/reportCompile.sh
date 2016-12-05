@@ -1,7 +1,7 @@
 #!/bin/bash
 
 out="REPORT.pdf"
-in0="../lab2/a2sliding/REPORT.md"
+in0="a2sliding/REPORT.md"
 in1="part1/REPORT.md"
 in2="part2/REPORT.md"
 

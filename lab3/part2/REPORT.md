@@ -166,7 +166,7 @@ padding_byte * buffer_size + secret_byte + exit_byte
 ```
 and the program indeed exits without receiving *SIGSEGV* signal.
 
-### Reference
+## Reference
 * [Linux Kernel Documentation on System Calls](
 https://github.com/torvalds/linux/blob/master/Documentation/adding-syscalls.txt)
 * [Linux x86 32-bit System Call Table](
@@ -178,4 +178,9 @@ https://www.wireshark.org/docs/wsug_html_chunked/)
 * `man 1 ettercap`
 * `man 1 nmap`
 
-### Division of Workload
+## Division of Workload
+The sliding part of assignment 2 was done entirely by Stephen Arychuk, he also
+did the *ettercap*-based ARP poisoning and *wireshark*-based traffic analysis
+for part 1 and wrote answers for question *c* and *d* of step 2.
+The *exploit.py* program was written by Jiahui Xie, he also wrote the answers
+for part 2, step 1 of part 1 and question *a* and *b* of step 2.
