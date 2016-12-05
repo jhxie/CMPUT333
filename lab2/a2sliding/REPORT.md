@@ -16,7 +16,7 @@
 
 - Using the command "openssl ca -policy policy_anything -config /etc/ssl/openssl.cnf -days 365 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt" we create the Servers Certificate. This uses the certificate request file along with the the key and certificate that is used to be the certificate authority named ca.cy and ca.key. We allow the certificate to exist for one year until you it expires and a new one has to be created. We set serial to be 01 so that when it comes time to renew the certificate we can set it to 0n where n is the newest number of certificates (02 for 2nd cert, 03 for 3rd cert). 
 
--We need to use policy_anything as the policy because the default is policy_match which needs country Name, state or Province Name, and organization Name to match exactly with the addition of common Name being provided. Policy_anything allows that only common Name is supplied and all other parameters are optional. So if we did not set the policy to be policy_anything then it would have failed because of the exact matching of the country Name, state or province name and organization name may or may not be exact or provided.
+- We need to use policy_anything as the policy because the default is policy_match which needs country Name, state or Province Name, and organization Name to match exactly with the addition of common Name being provided. Policy_anything allows that only common Name is supplied and all other parameters are optional. So if we did not set the policy to be policy_anything then it would have failed because of the exact matching of the country Name, state or province name and organization name may or may not be exact or provided.
 
 ### Question 4
 
@@ -30,11 +30,11 @@ Modifying the http-ssl.conf file located in the Apache files, edit the <Virtualh
 
 - Mapping the correct certificate files and keys:
 
-/t - <b>Server Certificate:</b> SSLCertificateFile "C:/Program Files/Apache Software Foundation/Apache2.2/conf/server.crt". This needs to be set to whatever you have as your server.crt.
+  - <b>Server Certificate:</b> SSLCertificateFile "C:/Program Files/Apache Software Foundation/Apache2.2/conf/server.crt". This needs to be set to whatever you have as your server.crt.
 
-/t - <b>Server Private Key:</b> SSLCertificateKeyFile "C:/Program Files/Apache Software Foundation/Apache2.2/conf/server.key". This needs to be set to whatever you have as your server.key.
+  - <b>Server Private Key:</b> SSLCertificateKeyFile "C:/Program Files/Apache Software Foundation/Apache2.2/conf/server.key". This needs to be set to whatever you have as your server.key.
 
-/t - <b>Certificate Authority (CA):</b> SSLCACertificateFile "C:/Program Files/Apache Software Foundation/Apache2.2/conf/ca.crt". This needs to be set to whatever you have as the CA.
+  - <b>Certificate Authority (CA):</b> SSLCACertificateFile "C:/Program Files/Apache Software Foundation/Apache2.2/conf/ca.crt". This needs to be set to whatever you have as the CA.
 
 ### Question 5
 
