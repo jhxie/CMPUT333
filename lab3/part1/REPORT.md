@@ -97,13 +97,35 @@ nmap -A 10.229.100.98-255
 
 #### Question a
 
-See Step 1
+The victim hosts can be determined by following the instructions shown in step
+one.
 
-Command to start the ARP poison "ettercap -Q -T -w test.pcap -M arp /10.229.100.55,101,102/"
-
-Wireshark or tcpdump to analyze the captured pcap file.
+To capture the network traffic through ARP poisoning among three victim hosts
+*10.229.100.55*, *10.229.100.101*, and *10.229.100.102*, issue the following
+*ettercap* command:
+```bash
+ettercap -Q -T -w arp.pcap -M arp /10.229.100.55,101,102/
+```
+in this case the captured output is recorded in a file named *arp.pcap*; later
+on either **Wireshark** or **tcpdump** can be used to analyze the network
+traffic based on this file.
 
 #### Question b
+The connections initiated among three victim hosts are a series of **HTTP**
+requests, the extracted repeating communication pattern is recorded in the
+following table (note the *frame number* are for reference only):
+
+| Frame Number | Source         | Destination    | Source Role | Destination Role |
+| ------------ | -------------- | -------------- | ----------- | ---------------- |
+| 457          | 10.229.100.101 | 10.229.100.55  | HTTP Client | HTTP Server      |
+| 48590        | 10.229.100.102 | 10.229.100.55  | HTTP Client | HTTP Server      |
+
+Within the thirty minutes of the *ettercap* run, host *10.229.100.101* sends
+**HTTP GET** request to the **HTTP** server at *10.229.100.55* to get a file
+named */Test2016/sound.mp3* on a regular basis while the other host
+*10.229.100.102* sends another **HTTP GET** request to the **HTTP** server at
+*10.229.100.55* to get a different file named */Test2016/image.jpg* from time
+to time.
 
 #### Question c
 
