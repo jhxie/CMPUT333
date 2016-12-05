@@ -76,4 +76,18 @@ Screenshot of web server successfully loading in the certificate is called "Afte
 
 ### Question 6
 
-Write up the process of	how to generate signed Java code and explain what is the purpose of each step (WHY each step is needed). What (if any) are the differences with respect to the web server certificates?
+- Generating signed Java code is very similar to generating a signed certificate authority for a web server.
+
+- We start out by using a command similar to "keytool -genkey -alias server -keyalg RSA -keysize 2048 -keystore keystore.jks".
+
+  - This command will create a Java keystore called keystore.jks. This item is similar to the ca.key in that it takes a keysize and a generated random value for RSA encryption.
+
+  - We will use this keystore to generate the .csr file.
+
+- We then enter a command similar to "keytool -certreq -alias server -file csr.csr -keystore keystore.jks".
+
+  - This command will create a .csr, which is a certificate signing request using the keystore that we created earlier.
+
+  - Again this is similar to the web server as it needs a ca.key to create the server.csr.
+
+- This is where some differences start (although there are some differences in the be)

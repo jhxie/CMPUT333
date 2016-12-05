@@ -129,4 +129,17 @@ to time.
 
 #### Question c
 
+The two client machines with IP addresses 10.229.100.101 and 10.229.100.102 are
+connected to each other via ssh on port 22. Both clients are requesting files from
+the Microsoft IIS WebServer 5.0 to retrieve specific files stated above.
+
 #### Question d
+
+The fully reconstructed sound file that is retrieved from */Test2016/sound.mp3*
+is attached in with the deliverables as well as the fully reconstructed image 
+file that is retrieved from */Test2016/image.jpg*. We managed to get enough tcp
+packets to create a complete copy both files. To get the image.jpg, we had to
+do a second ARP poisoning for another 30 minutes. We felt that it wouldn't be
+quality to just dump all of the bytes gathered from all packets. We used 
+Wireshark mainly to view the packets and to export the objects if all of the
+packets had been sent from any given **HTTP GET** request.
